@@ -1,0 +1,21 @@
+customer_id,customer_name,email,payment_terms_days
+CUST001,ABC Industries,abc@example.com,45
+CUST002,Nova Retail,finance@nova.example.com,15
+CUST003,Shree Enterprises,accounts@shree.example.com,15
+CUST004,Bright Manufacturing,payables@bright.example.com,45
+CUST005,Vertex Solutions,finance@vertex.example.com,30
+CUST006,Pioneer Distributors,accounts@pioneer.example.com,15
+CUST007,BlueStone Traders,finance@bluestone.example.com,15
+CUST008,Sunrise Components,payables@sunrise.example.com,15
+CUST009,Metro Engineering,accounts@metro.example.com,45
+CUST010,GreenField Foods,finance@greenfield.example.com,15
+CUST011,Apex Systems,accounts@apex.example.com,45
+CUST012,Omkar Trading,payables@omkar.example.com,45
+CUST013,Silverline Exports,finance@silverline.example.com,45
+CUST014,Prime Packaging,accounts@prime.example.com,15
+CUST015,Urban BuildTech,finance@urbanbuild.example.com,45
+CUST016,Delta Components,payables@delta.example.com,30
+CUST017,Reliable Machines,accounts@reliable.example.com,15
+CUST018,NextGen Electronics,finance@nextgen.example.com,15
+CUST019,Everest Supplies,accounts@everest.example.com,15
+CUST020,Maharashtra TechWorks,finance@mhtechworks.example.com,15

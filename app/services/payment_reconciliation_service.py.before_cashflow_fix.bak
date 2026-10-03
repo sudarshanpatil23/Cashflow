@@ -1,0 +1,283 @@
+﻿from __future__ import annotations
+
+import pandas as pd
+
+
+def normalize_payment_data(
+    dataframe: pd.DataFrame,
+) -> pd.DataFrame:
+
+    df = dataframe.copy()
+
+    df.columns = [
+        str(column).strip().lower()
+        for column in df.columns
+    ]
+
+    if "invoice_id" not in df.columns:
+        df["invoice_id"] = ""
+
+    if "customer_name" not in df.columns:
+        df["customer_name"] = ""
+
+    if "payment_date" not in df.columns:
+        df["payment_date"] = ""
+
+    if "payment_amount" not in df.columns:
+        df["payment_amount"] = 0
+
+    df["invoice_id"] = (
+        df["invoice_id"]
+        .astype(str)
+        .str.strip()
+    )
+
+    df["customer_name"] = (
+        df["customer_name"]
+        .astype(str)
+        .str.strip()
+    )
+
+    df["payment_date"] = (
+        df["payment_date"]
+        .astype(str)
+        .str.strip()
+    )
+
+    df["payment_amount"] = pd.to_numeric(
+        df["payment_amount"],
+        errors="coerce",
+    ).fillna(0)
+
+    return df
+
+
+def find_duplicate_payments(
+    payments: pd.DataFrame,
+) -> pd.DataFrame:
+
+    df = normalize_payment_data(
+        payments
+    )
+
+    duplicate_mask = df.duplicated(
+        subset=[
+            "invoice_id",
+            "payment_date",
+            "payment_amount",
+        ],
+        keep=False,
+    )
+
+    return df[
+        duplicate_mask
+    ].copy()
+
+
+def remove_duplicate_payments(
+    payments: pd.DataFrame,
+) -> pd.DataFrame:
+
+    df = normalize_payment_data(
+        payments
+    )
+
+    return df.drop_duplicates(
+        subset=[
+            "invoice_id",
+            "payment_date",
+            "payment_amount",
+        ],
+        keep="first",
+    ).copy()
+
+
+def determine_payment_status(
+    row: pd.Series,
+) -> str:
+
+    invoice_amount = float(
+        row.get(
+            "invoice_amount",
+            0,
+        )
+    )
+
+    paid_amount = float(
+        row.get(
+            "paid_amount",
+            0,
+        )
+    )
+
+    if paid_amount <= 0:
+        return "Unpaid"
+
+    if (
+        invoice_amount > 0
+        and paid_amount >= invoice_amount
+    ):
+        return "Paid"
+
+    return "Partially Paid"
+
+
+def reconcile_payments(
+    invoices: pd.DataFrame,
+    payments: pd.DataFrame,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+
+    invoice_df = invoices.copy()
+
+    invoice_df.columns = [
+        str(column).strip().lower()
+        for column in invoice_df.columns
+    ]
+
+    payment_df = normalize_payment_data(
+        payments
+    )
+
+    if "invoice_id" not in invoice_df.columns:
+        raise ValueError(
+            "Invoice data must contain invoice_id."
+        )
+
+    if "invoice_amount" not in invoice_df.columns:
+
+        if "amount" in invoice_df.columns:
+            invoice_df = invoice_df.rename(
+                columns={
+                    "amount": "invoice_amount"
+                }
+            )
+        else:
+            raise ValueError(
+                "Invoice data must contain amount or invoice_amount."
+            )
+
+    invoice_df["invoice_amount"] = pd.to_numeric(
+        invoice_df["invoice_amount"],
+        errors="coerce",
+    ).fillna(0)
+
+    invoice_df["invoice_id"] = (
+        invoice_df["invoice_id"]
+        .astype(str)
+        .str.strip()
+    )
+
+    # Remove previously calculated payment fields before
+    # rebuilding reconciliation results.
+    for derived_column in [
+        "paid_amount",
+        "outstanding_amount",
+        "payment_status",
+    ]:
+        if derived_column in invoice_df.columns:
+            invoice_df = invoice_df.drop(
+                columns=[derived_column]
+            )
+
+    duplicate_payments = (
+        find_duplicate_payments(
+            payment_df
+        )
+    )
+
+    clean_payments = (
+        remove_duplicate_payments(
+            payment_df
+        )
+    )
+
+    payment_summary = (
+        clean_payments
+        .groupby(
+            "invoice_id",
+            as_index=False,
+        )["payment_amount"]
+        .sum()
+        .rename(
+            columns={
+                "payment_amount": "paid_amount"
+            }
+        )
+    )
+
+    reconciled = invoice_df.merge(
+        payment_summary,
+        on="invoice_id",
+        how="left",
+    )
+
+    reconciled["paid_amount"] = (
+        reconciled["paid_amount"]
+        .fillna(0)
+    )
+
+    reconciled["outstanding_amount"] = (
+        reconciled["invoice_amount"]
+        - reconciled["paid_amount"]
+    ).clip(lower=0)
+
+    reconciled["payment_status"] = (
+        reconciled.apply(
+            determine_payment_status,
+            axis=1,
+        )
+    )
+
+    known_invoice_ids = set(
+        invoice_df["invoice_id"]
+    )
+
+    unmatched_payments = (
+        clean_payments[
+            ~clean_payments[
+                "invoice_id"
+            ].isin(known_invoice_ids)
+        ].copy()
+    )
+
+    return (
+        reconciled,
+        unmatched_payments,
+    )
+
+
+def build_reconciliation_report(
+    invoices: pd.DataFrame,
+    payments: pd.DataFrame,
+) -> dict:
+
+    reconciled, unmatched = (
+        reconcile_payments(
+            invoices,
+            payments,
+        )
+    )
+
+    duplicates = (
+        find_duplicate_payments(
+            payments
+        )
+    )
+
+    return {
+        "reconciled": reconciled,
+        "unmatched_payments": unmatched,
+        "duplicate_payments": duplicates,
+    }
+
+
+if __name__ == "__main__":
+
+    print("=" * 60)
+    print("     CASHFLOWAI PAYMENT RECONCILIATION")
+    print("=" * 60)
+    print()
+    print("Duplicate payments are detected and")
+    print("excluded from the paid total.")
+    print()
+    print("✓ Payment reconciliation engine ready.")

@@ -1,0 +1,5 @@
+invoice_id,customer_id,customer_name,invoice_date,due_date,invoice_amount,currency
+TEST-2001,CUST-201,Alpha Trading Pvt Ltd,2026-08-01,2026-08-31,250000,INR
+TEST-2002,CUST-202,Bharat Components,2026-08-10,2026-09-05,180000,INR
+TEST-2003,CUST-203,Metro Wholesale,2026-08-15,2026-09-15,320000,INR
+TEST-2004,CUST-204,Sunrise Distributors,2026-09-01,2026-09-20,95000,INR

@@ -1,0 +1,4 @@
+id,invoice_id,customer_name,payment_date,payment_amount
+PAY-3001,TEST-2001,Alpha Trading Pvt Ltd,2026-09-10,100000
+PAY-3002,TEST-2002,Bharat Components,2026-09-15,80000
+PAY-3003,TEST-2003,Metro Wholesale,2026-09-18,150000

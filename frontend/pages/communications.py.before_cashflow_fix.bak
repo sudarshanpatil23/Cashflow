@@ -1,0 +1,28 @@
+﻿from __future__ import annotations
+
+import streamlit as st
+
+from frontend.ui_helpers import get_communications
+
+
+st.title("Communications")
+st.caption("Customer communication history")
+
+df = get_communications()
+
+if df.empty:
+    st.info(
+        "No communication records available yet."
+    )
+    st.stop()
+
+st.metric(
+    "Communication Records",
+    len(df),
+)
+
+st.dataframe(
+    df,
+    use_container_width=True,
+    hide_index=True,
+)

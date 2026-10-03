@@ -1,0 +1,220 @@
+communication_id,invoice_id,customer_id,communication_date,channel,status,message
+COM001,INV001,CUST008,2026-08-09,email,sent,Payment reminder sent to customer.
+COM002,INV001,CUST008,2026-09-01,email,response,Customer requested payment extension.
+COM003,INV001,CUST008,2026-07-16,email,dispute,Customer reported PO mismatch on invoice.
+COM004,INV002,CUST018,2026-09-06,email,response,Customer requested payment extension.
+COM005,INV002,CUST018,2026-09-02,email,sent,Payment reminder sent to customer.
+COM006,INV002,CUST018,2026-09-15,email,response,Customer responded regarding payment.
+COM007,INV002,CUST018,2026-09-18,email,response,Customer requested payment extension.
+COM008,INV003,CUST014,2026-09-02,email,dispute,Customer reported PO mismatch on invoice.
+COM009,INV003,CUST014,2026-09-02,email,response,Customer requested payment extension.
+COM010,INV003,CUST014,2026-09-15,email,response,Customer responded regarding payment.
+COM011,INV004,CUST009,2026-09-19,email,sent,Payment reminder sent to customer.
+COM012,INV004,CUST009,2026-09-19,email,response,Customer responded regarding payment.
+COM013,INV004,CUST009,2026-09-19,email,no_response,Payment reminder sent. No response received.
+COM014,INV005,CUST011,2026-09-15,email,dispute,Customer reported PO mismatch on invoice.
+COM015,INV007,CUST004,2026-09-07,email,dispute,Customer reported PO mismatch on invoice.
+COM016,INV007,CUST004,2026-08-07,email,sent,Payment reminder sent to customer.
+COM017,INV007,CUST004,2026-08-10,email,response,Customer requested payment extension.
+COM018,INV008,CUST009,2026-09-11,email,no_response,Payment reminder sent. No response received.
+COM019,INV008,CUST009,2026-09-17,email,response,Customer responded regarding payment.
+COM020,INV008,CUST009,2026-09-14,email,response,Customer responded regarding payment.
+COM021,INV009,CUST018,2026-09-11,email,response,Customer responded regarding payment.
+COM022,INV009,CUST018,2026-09-09,email,response,Customer requested payment extension.
+COM023,INV009,CUST018,2026-09-09,email,response,Customer requested payment extension.
+COM024,INV011,CUST012,2026-09-12,email,sent,Payment reminder sent to customer.
+COM025,INV011,CUST012,2026-08-18,email,sent,Payment reminder sent to customer.
+COM026,INV011,CUST012,2026-07-13,email,no_response,Payment reminder sent. No response received.
+COM027,INV014,CUST009,2026-09-11,email,no_response,Payment reminder sent. No response received.
+COM028,INV016,CUST009,2026-07-19,email,no_response,Payment reminder sent. No response received.
+COM029,INV016,CUST009,2026-08-18,email,no_response,Payment reminder sent. No response received.
+COM030,INV016,CUST009,2026-08-30,email,sent,Payment reminder sent to customer.
+COM031,INV016,CUST009,2026-08-17,email,no_response,Payment reminder sent. No response received.
+COM032,INV017,CUST020,2026-07-18,email,response,Customer responded regarding payment.
+COM033,INV017,CUST020,2026-09-12,email,dispute,Customer reported PO mismatch on invoice.
+COM034,INV019,CUST009,2026-07-10,email,response,Customer responded regarding payment.
+COM035,INV020,CUST008,2026-07-30,email,sent,Payment reminder sent to customer.
+COM036,INV020,CUST008,2026-09-15,email,dispute,Customer reported PO mismatch on invoice.
+COM037,INV020,CUST008,2026-08-10,email,response,Customer requested payment extension.
+COM038,INV020,CUST008,2026-06-30,email,no_response,Payment reminder sent. No response received.
+COM039,INV021,CUST008,2026-09-13,email,no_response,Payment reminder sent. No response received.
+COM040,INV021,CUST008,2026-09-13,email,response,Customer responded regarding payment.
+COM041,INV021,CUST008,2026-09-12,email,dispute,Customer reported PO mismatch on invoice.
+COM042,INV021,CUST008,2026-09-20,email,response,Customer responded regarding payment.
+COM043,INV022,CUST009,2026-09-09,email,response,Customer responded regarding payment.
+COM044,INV022,CUST009,2026-09-18,email,dispute,Customer reported PO mismatch on invoice.
+COM045,INV022,CUST009,2026-09-08,email,response,Customer responded regarding payment.
+COM046,INV023,CUST011,2026-08-26,email,response,Customer requested payment extension.
+COM047,INV023,CUST011,2026-09-12,email,response,Customer requested payment extension.
+COM048,INV023,CUST011,2026-08-29,email,response,Customer requested payment extension.
+COM049,INV024,CUST013,2026-08-31,email,no_response,Payment reminder sent. No response received.
+COM050,INV024,CUST013,2026-09-12,email,response,Customer responded regarding payment.
+COM051,INV024,CUST013,2026-08-26,email,dispute,Customer reported PO mismatch on invoice.
+COM052,INV025,CUST009,2026-09-17,email,response,Customer requested payment extension.
+COM053,INV025,CUST009,2026-09-09,email,response,Customer responded regarding payment.
+COM054,INV025,CUST009,2026-09-01,email,no_response,Payment reminder sent. No response received.
+COM055,INV026,CUST018,2026-08-29,email,response,Customer requested payment extension.
+COM056,INV026,CUST018,2026-09-19,email,response,Customer requested payment extension.
+COM057,INV027,CUST014,2026-08-16,email,response,Customer requested payment extension.
+COM058,INV027,CUST014,2026-09-05,email,sent,Payment reminder sent to customer.
+COM059,INV027,CUST014,2026-07-27,email,response,Customer responded regarding payment.
+COM060,INV027,CUST014,2026-07-31,email,response,Customer requested payment extension.
+COM061,INV028,CUST008,2026-09-09,email,response,Customer responded regarding payment.
+COM062,INV028,CUST008,2026-09-18,email,response,Customer responded regarding payment.
+COM063,INV029,CUST003,2026-09-10,email,dispute,Customer reported PO mismatch on invoice.
+COM064,INV029,CUST003,2026-09-13,email,dispute,Customer reported PO mismatch on invoice.
+COM065,INV031,CUST003,2026-08-29,email,response,Customer requested payment extension.
+COM066,INV032,CUST015,2026-09-09,email,no_response,Payment reminder sent. No response received.
+COM067,INV032,CUST015,2026-09-06,email,response,Customer requested payment extension.
+COM068,INV032,CUST015,2026-07-22,email,sent,Payment reminder sent to customer.
+COM069,INV032,CUST015,2026-08-08,email,response,Customer responded regarding payment.
+COM070,INV033,CUST001,2026-07-30,email,no_response,Payment reminder sent. No response received.
+COM071,INV033,CUST001,2026-08-07,email,dispute,Customer reported PO mismatch on invoice.
+COM072,INV033,CUST001,2026-08-30,email,response,Customer requested payment extension.
+COM073,INV034,CUST018,2026-09-09,email,response,Customer responded regarding payment.
+COM074,INV034,CUST018,2026-09-03,email,dispute,Customer reported PO mismatch on invoice.
+COM075,INV034,CUST018,2026-09-11,email,response,Customer responded regarding payment.
+COM076,INV034,CUST018,2026-09-01,email,response,Customer responded regarding payment.
+COM077,INV035,CUST004,2026-08-17,email,no_response,Payment reminder sent. No response received.
+COM078,INV035,CUST004,2026-08-30,email,no_response,Payment reminder sent. No response received.
+COM079,INV037,CUST017,2026-08-31,email,no_response,Payment reminder sent. No response received.
+COM080,INV037,CUST017,2026-09-17,email,no_response,Payment reminder sent. No response received.
+COM081,INV037,CUST017,2026-09-02,email,response,Customer requested payment extension.
+COM082,INV037,CUST017,2026-09-18,email,dispute,Customer reported PO mismatch on invoice.
+COM083,INV038,CUST010,2026-08-02,email,dispute,Customer reported PO mismatch on invoice.
+COM084,INV038,CUST010,2026-07-21,email,sent,Payment reminder sent to customer.
+COM085,INV038,CUST010,2026-07-26,email,response,Customer responded regarding payment.
+COM086,INV038,CUST010,2026-07-19,email,response,Customer responded regarding payment.
+COM087,INV039,CUST007,2026-09-19,email,sent,Payment reminder sent to customer.
+COM088,INV039,CUST007,2026-09-01,email,dispute,Customer reported PO mismatch on invoice.
+COM089,INV040,CUST018,2026-07-17,email,sent,Payment reminder sent to customer.
+COM090,INV040,CUST018,2026-08-17,email,dispute,Customer reported PO mismatch on invoice.
+COM091,INV041,CUST011,2026-07-29,email,response,Customer requested payment extension.
+COM092,INV043,CUST008,2026-09-04,email,response,Customer responded regarding payment.
+COM093,INV043,CUST008,2026-08-31,email,response,Customer requested payment extension.
+COM094,INV043,CUST008,2026-07-29,email,response,Customer responded regarding payment.
+COM095,INV043,CUST008,2026-08-07,email,sent,Payment reminder sent to customer.
+COM096,INV044,CUST016,2026-09-09,email,sent,Payment reminder sent to customer.
+COM097,INV044,CUST016,2026-09-15,email,response,Customer requested payment extension.
+COM098,INV044,CUST016,2026-09-17,email,sent,Payment reminder sent to customer.
+COM099,INV046,CUST006,2026-09-19,email,no_response,Payment reminder sent. No response received.
+COM100,INV047,CUST014,2026-09-04,email,sent,Payment reminder sent to customer.
+COM101,INV047,CUST014,2026-09-15,email,sent,Payment reminder sent to customer.
+COM102,INV048,CUST010,2026-09-15,email,dispute,Customer reported PO mismatch on invoice.
+COM103,INV048,CUST010,2026-08-10,email,dispute,Customer reported PO mismatch on invoice.
+COM104,INV048,CUST010,2026-08-20,email,dispute,Customer reported PO mismatch on invoice.
+COM105,INV048,CUST010,2026-08-24,email,response,Customer requested payment extension.
+COM106,INV049,CUST015,2026-09-04,email,dispute,Customer reported PO mismatch on invoice.
+COM107,INV049,CUST015,2026-07-19,email,response,Customer responded regarding payment.
+COM108,INV050,CUST008,2026-09-01,email,sent,Payment reminder sent to customer.
+COM109,INV050,CUST008,2026-09-04,email,no_response,Payment reminder sent. No response received.
+COM110,INV050,CUST008,2026-08-29,email,sent,Payment reminder sent to customer.
+COM111,INV050,CUST008,2026-08-30,email,no_response,Payment reminder sent. No response received.
+COM112,INV051,CUST001,2026-07-23,email,sent,Payment reminder sent to customer.
+COM113,INV051,CUST001,2026-08-24,email,sent,Payment reminder sent to customer.
+COM114,INV051,CUST001,2026-09-17,email,response,Customer requested payment extension.
+COM115,INV051,CUST001,2026-08-09,email,response,Customer requested payment extension.
+COM116,INV053,CUST002,2026-09-05,email,response,Customer responded regarding payment.
+COM117,INV054,CUST011,2026-09-17,email,sent,Payment reminder sent to customer.
+COM118,INV054,CUST011,2026-09-11,email,no_response,Payment reminder sent. No response received.
+COM119,INV054,CUST011,2026-09-17,email,dispute,Customer reported PO mismatch on invoice.
+COM120,INV055,CUST009,2026-07-07,email,response,Customer requested payment extension.
+COM121,INV056,CUST018,2026-09-20,email,no_response,Payment reminder sent. No response received.
+COM122,INV056,CUST018,2026-09-08,email,no_response,Payment reminder sent. No response received.
+COM123,INV056,CUST018,2026-09-02,email,no_response,Payment reminder sent. No response received.
+COM124,INV056,CUST018,2026-09-05,email,sent,Payment reminder sent to customer.
+COM125,INV057,CUST019,2026-08-23,email,dispute,Customer reported PO mismatch on invoice.
+COM126,INV057,CUST019,2026-08-02,email,response,Customer requested payment extension.
+COM127,INV058,CUST014,2026-09-14,email,response,Customer responded regarding payment.
+COM128,INV058,CUST014,2026-08-31,email,response,Customer requested payment extension.
+COM129,INV058,CUST014,2026-09-09,email,dispute,Customer reported PO mismatch on invoice.
+COM130,INV059,CUST014,2026-08-07,email,response,Customer requested payment extension.
+COM131,INV059,CUST014,2026-08-04,email,dispute,Customer reported PO mismatch on invoice.
+COM132,INV059,CUST014,2026-09-18,email,response,Customer requested payment extension.
+COM133,INV060,CUST015,2026-07-17,email,dispute,Customer reported PO mismatch on invoice.
+COM134,INV060,CUST015,2026-06-26,email,sent,Payment reminder sent to customer.
+COM135,INV061,CUST002,2026-09-02,email,dispute,Customer reported PO mismatch on invoice.
+COM136,INV063,CUST018,2026-07-23,email,dispute,Customer reported PO mismatch on invoice.
+COM137,INV063,CUST018,2026-08-20,email,no_response,Payment reminder sent. No response received.
+COM138,INV064,CUST006,2026-08-29,email,response,Customer requested payment extension.
+COM139,INV064,CUST006,2026-09-18,email,no_response,Payment reminder sent. No response received.
+COM140,INV064,CUST006,2026-09-12,email,response,Customer requested payment extension.
+COM141,INV064,CUST006,2026-09-11,email,sent,Payment reminder sent to customer.
+COM142,INV065,CUST003,2026-08-12,email,response,Customer requested payment extension.
+COM143,INV065,CUST003,2026-09-02,email,response,Customer responded regarding payment.
+COM144,INV067,CUST003,2026-09-12,email,response,Customer responded regarding payment.
+COM145,INV068,CUST016,2026-09-06,email,response,Customer responded regarding payment.
+COM146,INV068,CUST016,2026-07-21,email,dispute,Customer reported PO mismatch on invoice.
+COM147,INV068,CUST016,2026-07-28,email,response,Customer requested payment extension.
+COM148,INV069,CUST002,2026-09-05,email,response,Customer responded regarding payment.
+COM149,INV069,CUST002,2026-09-19,email,sent,Payment reminder sent to customer.
+COM150,INV070,CUST013,2026-08-14,email,dispute,Customer reported PO mismatch on invoice.
+COM151,INV070,CUST013,2026-09-12,email,dispute,Customer reported PO mismatch on invoice.
+COM152,INV070,CUST013,2026-08-17,email,response,Customer requested payment extension.
+COM153,INV071,CUST014,2026-08-04,email,dispute,Customer reported PO mismatch on invoice.
+COM154,INV072,CUST016,2026-09-17,email,response,Customer requested payment extension.
+COM155,INV072,CUST016,2026-08-29,email,response,Customer requested payment extension.
+COM156,INV072,CUST016,2026-09-05,email,no_response,Payment reminder sent. No response received.
+COM157,INV072,CUST016,2026-09-01,email,dispute,Customer reported PO mismatch on invoice.
+COM158,INV073,CUST007,2026-09-20,email,response,Customer requested payment extension.
+COM159,INV073,CUST007,2026-09-10,email,response,Customer requested payment extension.
+COM160,INV075,CUST002,2026-07-24,email,no_response,Payment reminder sent. No response received.
+COM161,INV075,CUST002,2026-09-12,email,response,Customer responded regarding payment.
+COM162,INV075,CUST002,2026-09-12,email,sent,Payment reminder sent to customer.
+COM163,INV075,CUST002,2026-07-15,email,response,Customer requested payment extension.
+COM164,INV076,CUST017,2026-09-10,email,sent,Payment reminder sent to customer.
+COM165,INV078,CUST003,2026-07-29,email,response,Customer requested payment extension.
+COM166,INV079,CUST004,2026-08-28,email,response,Customer responded regarding payment.
+COM167,INV079,CUST004,2026-09-04,email,response,Customer requested payment extension.
+COM168,INV079,CUST004,2026-09-02,email,no_response,Payment reminder sent. No response received.
+COM169,INV079,CUST004,2026-07-24,email,dispute,Customer reported PO mismatch on invoice.
+COM170,INV080,CUST020,2026-09-20,email,no_response,Payment reminder sent. No response received.
+COM171,INV080,CUST020,2026-09-13,email,dispute,Customer reported PO mismatch on invoice.
+COM172,INV080,CUST020,2026-09-15,email,sent,Payment reminder sent to customer.
+COM173,INV081,CUST014,2026-08-27,email,response,Customer responded regarding payment.
+COM174,INV081,CUST014,2026-06-24,email,response,Customer responded regarding payment.
+COM175,INV081,CUST014,2026-08-01,email,response,Customer responded regarding payment.
+COM176,INV082,CUST017,2026-09-18,email,dispute,Customer reported PO mismatch on invoice.
+COM177,INV082,CUST017,2026-08-16,email,response,Customer requested payment extension.
+COM178,INV082,CUST017,2026-09-10,email,response,Customer requested payment extension.
+COM179,INV082,CUST017,2026-08-29,email,response,Customer requested payment extension.
+COM180,INV083,CUST011,2026-09-20,email,dispute,Customer reported PO mismatch on invoice.
+COM181,INV083,CUST011,2026-09-15,email,response,Customer requested payment extension.
+COM182,INV084,CUST005,2026-09-20,email,no_response,Payment reminder sent. No response received.
+COM183,INV084,CUST005,2026-09-04,email,no_response,Payment reminder sent. No response received.
+COM184,INV085,CUST015,2026-09-02,email,no_response,Payment reminder sent. No response received.
+COM185,INV085,CUST015,2026-08-27,email,sent,Payment reminder sent to customer.
+COM186,INV085,CUST015,2026-08-31,email,response,Customer requested payment extension.
+COM187,INV086,CUST015,2026-08-31,email,no_response,Payment reminder sent. No response received.
+COM188,INV086,CUST015,2026-07-15,email,sent,Payment reminder sent to customer.
+COM189,INV086,CUST015,2026-09-12,email,dispute,Customer reported PO mismatch on invoice.
+COM190,INV087,CUST003,2026-09-04,email,sent,Payment reminder sent to customer.
+COM191,INV087,CUST003,2026-09-15,email,sent,Payment reminder sent to customer.
+COM192,INV088,CUST009,2026-09-04,email,sent,Payment reminder sent to customer.
+COM193,INV088,CUST009,2026-09-20,email,response,Customer requested payment extension.
+COM194,INV088,CUST009,2026-09-02,email,no_response,Payment reminder sent. No response received.
+COM195,INV089,CUST008,2026-08-21,email,response,Customer responded regarding payment.
+COM196,INV089,CUST008,2026-09-13,email,dispute,Customer reported PO mismatch on invoice.
+COM197,INV089,CUST008,2026-09-10,email,response,Customer requested payment extension.
+COM198,INV091,CUST020,2026-08-12,email,dispute,Customer reported PO mismatch on invoice.
+COM199,INV091,CUST020,2026-09-13,email,response,Customer responded regarding payment.
+COM200,INV092,CUST018,2026-08-11,email,dispute,Customer reported PO mismatch on invoice.
+COM201,INV092,CUST018,2026-08-13,email,dispute,Customer reported PO mismatch on invoice.
+COM202,INV092,CUST018,2026-09-18,email,no_response,Payment reminder sent. No response received.
+COM203,INV093,CUST005,2026-08-19,email,no_response,Payment reminder sent. No response received.
+COM204,INV093,CUST005,2026-08-20,email,response,Customer requested payment extension.
+COM205,INV095,CUST020,2026-09-12,email,no_response,Payment reminder sent. No response received.
+COM206,INV095,CUST020,2026-09-18,email,response,Customer responded regarding payment.
+COM207,INV095,CUST020,2026-08-22,email,sent,Payment reminder sent to customer.
+COM208,INV096,CUST007,2026-07-28,email,sent,Payment reminder sent to customer.
+COM209,INV096,CUST007,2026-08-07,email,response,Customer responded regarding payment.
+COM210,INV097,CUST017,2026-08-16,email,no_response,Payment reminder sent. No response received.
+COM211,INV097,CUST017,2026-09-06,email,dispute,Customer reported PO mismatch on invoice.
+COM212,INV097,CUST017,2026-08-08,email,dispute,Customer reported PO mismatch on invoice.
+COM213,INV098,CUST003,2026-07-07,email,no_response,Payment reminder sent. No response received.
+COM214,INV099,CUST002,2026-09-20,email,response,Customer requested payment extension.
+COM215,INV099,CUST002,2026-09-19,email,no_response,Payment reminder sent. No response received.
+COM216,INV099,CUST002,2026-09-17,email,dispute,Customer reported PO mismatch on invoice.
+COM217,INV099,CUST002,2026-09-19,email,no_response,Payment reminder sent. No response received.
+COM218,INV100,CUST009,2026-09-04,email,response,Customer requested payment extension.
+COM219,INV100,CUST009,2026-09-10,email,sent,Payment reminder sent to customer.

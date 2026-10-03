@@ -1,0 +1,107 @@
+CASHFLOWAI COLLECTION POLICY
+
+Purpose:
+This policy defines how the finance team should prioritize receivable collection actions.
+
+Collection Rules:
+
+1. Current invoices — NO ESCALATION
+Trigger: invoice is not overdue.
+Action: normally take no escalation action.
+The invoice should remain under normal monitoring.
+Keywords: current invoice, not overdue, no escalation.
+
+2. 1–7 days overdue — FRIENDLY REMINDER
+Trigger: invoice is between 1 and 7 days overdue.
+Action: send a friendly payment reminder.
+The tone should be professional and polite.
+Keywords: 1 day overdue, 2 days overdue, 3 days overdue, 4 days overdue, 5 days overdue, 6 days overdue, 7 days overdue, friendly reminder.
+
+3. 8–15 days overdue — FORMAL REMINDER
+Trigger: invoice is between 8 and 15 days overdue.
+Action: send a formal payment reminder.
+Mention the invoice number, outstanding amount, and due date.
+Keywords: 8 days overdue, 9 days overdue, 10 days overdue, 11 days overdue, 12 days overdue, 13 days overdue, 14 days overdue, 15 days overdue, formal reminder.
+
+4. 16–30 days overdue — ESCALATION REVIEW
+Trigger: invoice is between 16 and 30 days overdue.
+Action: flag the account for escalation review.
+The finance team should review previous payment behavior and communication history.
+Keywords: 16 days overdue, 17 days overdue, 18 days overdue, 19 days overdue, 20 days overdue, 21 days overdue, 22 days overdue, 23 days overdue, 24 days overdue, 25 days overdue, 26 days overdue, 27 days overdue, 28 days overdue, 29 days overdue, 30 days overdue, escalation review.
+
+5. MORE THAN 30 DAYS OVERDUE — MANAGEMENT REVIEW
+Trigger: invoice is more than 30 days overdue.
+Action: flag the account for management review.
+The finance team should determine the appropriate next action.
+Keywords: 31 days overdue, 32 days overdue, 33 days overdue, 34 days overdue, 35 days overdue, more than 30 days overdue, 30+ days overdue, management review.
+
+6. NO RESPONSE — HUMAN REVIEW PRIORITY
+Trigger: customer does not respond to recent collection communications.
+Action: increase the priority for human review.
+The system should record the number of unanswered communications.
+Keywords: no response, no reply, unanswered reminder, customer did not respond, communication ignored.
+
+7. PARTIAL PAYMENT — MONITOR OUTSTANDING BALANCE
+Trigger: invoice has been partially paid.
+Action: calculate the remaining outstanding amount.
+Collection actions should focus on the outstanding balance rather than the original invoice amount.
+Keywords: partial payment, partially paid, remaining balance, outstanding balance.
+
+8. ACTIVE DISPUTE — DISPUTE REVIEW
+Trigger: customer has reported a dispute.
+Action: resolve or review the dispute before aggressive collection escalation.
+The dispute should be recorded in the customer's communication history.
+Keywords: active dispute, customer dispute, payment dispute, disputed invoice, dispute review.
+
+9. PO MISMATCH — VERIFY INVOICE
+Trigger: customer reports a purchase-order mismatch.
+Action: verify the purchase order and invoice details before escalation.
+The finance team should correct or review the invoice when required.
+Keywords: PO mismatch, purchase order mismatch, incorrect PO, wrong PO number, purchase order error.
+
+10. HUMAN APPROVAL — REQUIRED
+Trigger: CashFlowAI generates a collection recommendation or external action.
+Action: the recommendation is advisory and requires human approval.
+No collection email, escalation, legal notice, or other external action should be sent automatically without human approval.
+Keywords: human approval, manual approval, approval required, human review.
+
+11. EXPLAINABILITY — REQUIRED
+Trigger: CashFlowAI generates a recommendation.
+Action: include the policy rule and business signals that caused the recommendation.
+The explanation should identify relevant factors such as overdue days, outstanding amount, payment history, communication history, and disputes.
+Keywords: explainability, recommendation reason, business signals, policy rule, explanation.
+
+12. PRIORITY — MULTIPLE ISSUES
+When multiple issues exist, consider the following factors:
+- Days overdue
+- Outstanding amount
+- Previous late-payment behavior
+- No-response history
+- Active disputes
+- Company-specific collection policies
+
+When multiple rules apply, the system should consider all relevant signals and provide an explainable recommendation for human review.
+
+13. LARGE OUTSTANDING BALANCE — PRIORITY SIGNAL
+Trigger: customer has a significant outstanding balance.
+Action: consider the outstanding amount when prioritizing collection work.
+The amount alone should not automatically determine escalation.
+Keywords: large outstanding balance, high outstanding amount, significant receivable, outstanding amount.
+
+14. PREVIOUS LATE PAYMENT — RISK SIGNAL
+Trigger: customer has a history of late payments.
+Action: consider previous payment behavior when analyzing collection priority.
+Previous late payment history should be used as a supporting signal, not as the sole reason for escalation.
+Keywords: previous late payment, payment history, repeated late payment, late payer.
+
+15. AUDIT TRAIL — REQUIRED
+Trigger: CashFlowAI analyzes an invoice, customer, dispute, risk, or collection action.
+Action: record the analysis and recommendation in the audit trail.
+The audit record should contain the relevant invoice/customer reference, recommendation, reasons, and timestamp.
+Keywords: audit trail, audit log, analysis record, recommendation record.
+
+GENERAL SAFETY RULE:
+CashFlowAI is a decision-support system for finance teams.
+It should calculate financial values deterministically where possible and use AI for unstructured analysis, policy retrieval, recommendations, and communication drafting.
+CashFlowAI must not make automatic legal decisions or automatically send external collection actions.
+Final decisions remain with an authorized human finance team member.

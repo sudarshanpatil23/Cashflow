@@ -1,0 +1,799 @@
+﻿from __future__ import annotations
+
+import pandas as pd
+import streamlit as st
+
+from frontend.ui_helpers import (
+    get_communications,
+    get_payments,
+    get_receivables,
+    get_risk_table,
+)
+
+from app.services.payment_delay_autopsy_service import (
+    build_payment_delay_autopsy,
+)
+
+from app.services.recovery_learning_service import (
+    build_recovery_learning_loop,
+)
+
+
+st.title("Customer 360")
+
+st.caption(
+    "Complete customer-level view of receivables, payments, risk, "
+    "communication, and payment behavior."
+)
+
+
+# =========================================================
+# LOAD DATA
+# =========================================================
+
+receivables = get_receivables()
+payments = get_payments()
+communications = get_communications()
+
+
+if receivables.empty:
+    st.info("No customer data available.")
+    st.stop()
+
+
+customer_names = (
+    receivables["customer_name"]
+    .astype(str)
+    .drop_duplicates()
+    .sort_values()
+    .tolist()
+)
+
+
+selected_customer = st.selectbox(
+    "Select Customer",
+    customer_names,
+)
+
+
+customer_invoices = receivables[
+    receivables["customer_name"]
+    .astype(str)
+    .eq(selected_customer)
+].copy()
+
+
+if customer_invoices.empty:
+    st.warning("No invoice records found for this customer.")
+    st.stop()
+
+
+# =========================================================
+# CUSTOMER SUMMARY
+# =========================================================
+
+total_invoices = len(customer_invoices)
+
+total_billed = customer_invoices[
+    "invoice_amount"
+].sum()
+
+total_paid = customer_invoices[
+    "paid_amount"
+].sum()
+
+total_outstanding = customer_invoices[
+    "outstanding_amount"
+].sum()
+
+total_overdue = customer_invoices.loc[
+    customer_invoices["overdue_days"] > 0,
+    "outstanding_amount",
+].sum()
+
+max_overdue_days = int(
+    customer_invoices["overdue_days"].max()
+)
+
+
+summary1, summary2, summary3, summary4 = st.columns(4)
+
+with summary1:
+    st.metric(
+        "Invoices",
+        total_invoices,
+    )
+
+with summary2:
+    st.metric(
+        "Total Billed",
+        f"₹{total_billed:,.0f}",
+    )
+
+with summary3:
+    st.metric(
+        "Total Paid",
+        f"₹{total_paid:,.0f}",
+    )
+
+with summary4:
+    st.metric(
+        "Outstanding",
+        f"₹{total_outstanding:,.0f}",
+    )
+
+
+summary5, summary6, summary7 = st.columns(3)
+
+with summary5:
+    st.metric(
+        "Overdue Amount",
+        f"₹{total_overdue:,.0f}",
+    )
+
+with summary6:
+    st.metric(
+        "Maximum Overdue Days",
+        max_overdue_days,
+    )
+
+with summary7:
+
+    customer_risk_source = get_risk_table(
+        customer_invoices
+    )
+
+    if customer_risk_source.empty:
+        risk_level = "LOW"
+    else:
+        risk_level = (
+            customer_risk_source[
+                "risk_level"
+            ].iloc[0]
+        )
+
+    st.metric(
+        "Risk Level",
+        risk_level,
+    )
+
+
+# =========================================================
+# CUSTOMER STATUS
+# =========================================================
+
+st.divider()
+
+st.subheader("Customer Status")
+
+status_col1, status_col2 = st.columns(2)
+
+with status_col1:
+
+    payment_status_counts = (
+        customer_invoices[
+            "payment_status"
+        ]
+        .astype(str)
+        .value_counts()
+    )
+
+    st.write("**Payment Status**")
+
+    st.dataframe(
+        payment_status_counts.rename(
+            "Count"
+        ).reset_index().rename(
+            columns={
+                "index": "Status"
+            }
+        ),
+        use_container_width=True,
+        hide_index=True,
+    )
+
+
+with status_col2:
+
+    dispute_values = (
+        customer_invoices[
+            "dispute_status"
+        ]
+        .astype(str)
+        .value_counts()
+    )
+
+    st.write("**Dispute Status**")
+
+    st.dataframe(
+        dispute_values.rename(
+            "Count"
+        ).reset_index().rename(
+            columns={
+                "index": "Status"
+            }
+        ),
+        use_container_width=True,
+        hide_index=True,
+    )
+
+
+# =========================================================
+# AI RISK
+# =========================================================
+
+st.divider()
+
+st.subheader("AI Collection Risk")
+
+risk_df = get_risk_table(
+    customer_invoices
+)
+
+if risk_df.empty:
+
+    st.info(
+        "No risk analysis available."
+    )
+
+else:
+
+    risk_row = risk_df.iloc[0]
+
+    risk_col1, risk_col2 = st.columns(2)
+
+    with risk_col1:
+
+        st.metric(
+            "Risk Score",
+            int(
+                risk_row["risk_score"]
+            ),
+        )
+
+        st.write("**Risk Level**")
+
+        st.write(
+            risk_row["risk_level"]
+        )
+
+    with risk_col2:
+
+        st.write("**Risk Reasons**")
+
+        st.write(
+            risk_row["risk_reasons"]
+        )
+
+
+# =========================================================
+# PAYMENT DELAY AUTOPSY
+# =========================================================
+
+st.divider()
+
+st.header("🔎 Payment Delay Autopsy")
+
+st.caption(
+    "Explainable analysis of this customer's payment behavior "
+    "using available invoice and payment history."
+)
+
+
+autopsy_result = build_payment_delay_autopsy(
+    receivables=receivables,
+    payments=payments,
+    customer_name=selected_customer,
+)
+
+
+if autopsy_result["status"] != "success":
+
+    st.info(
+        autopsy_result.get(
+            "message",
+            "Payment delay analysis is unavailable."
+        )
+    )
+
+else:
+
+    autopsy = autopsy_result["summary"]
+
+    st.subheader("Payment Behavior")
+
+    autopsy_col1, autopsy_col2, autopsy_col3, autopsy_col4 = (
+        st.columns(4)
+    )
+
+    with autopsy_col1:
+        st.metric(
+            "Invoices Analyzed",
+            autopsy["invoice_count"],
+        )
+
+    with autopsy_col2:
+        st.metric(
+            "Current Outstanding",
+            f"₹{autopsy['current_outstanding']:,.0f}",
+        )
+
+    with autopsy_col3:
+        st.metric(
+            "Max Overdue",
+            f"{autopsy['max_overdue_days']} days",
+        )
+
+    with autopsy_col4:
+        average_delay = autopsy["average_payment_delay_days"]
+
+        if autopsy["completed_invoices"] == 0:
+            delay_display = "N/A"
+            delay_help = (
+                "No completed payment cycle is available "
+                "to calculate historical payment delay."
+            )
+        else:
+            delay_display = f"{average_delay} days"
+            delay_help = (
+                "Average final payment delay across completed invoices."
+            )
+
+        st.metric(
+            "Avg. Historical Payment Delay",
+            delay_display,
+            help=delay_help,
+        )
+
+    st.write(
+        "**Detected Payment Pattern:** "
+        f"{autopsy['pattern']}"
+    )
+
+    st.subheader(
+        "Why this pattern was identified"
+    )
+
+    for reason in autopsy_result["reasons"]:
+        st.write(
+            f"• {reason}"
+        )
+
+    st.subheader(
+        "Payment Delay Evidence"
+    )
+
+    autopsy_invoice_history = (
+        autopsy_result[
+            "invoice_history"
+        ].copy()
+    )
+
+    if not autopsy_invoice_history.empty:
+
+        autopsy_invoice_history = (
+            autopsy_invoice_history.rename(
+                columns={
+                    "invoice_id": "Invoice",
+                    "invoice_amount": "Invoice Amount",
+                    "paid_amount": "Paid",
+                    "outstanding_amount": "Outstanding",
+                    "due_date": "Due Date",
+                    "overdue_days": "Overdue Days",
+                    "payment_count": "Payment Count",
+                    "first_payment_delay": "First Payment Delay",
+                    "final_payment_delay": "Final Payment Delay",
+                }
+            )
+        )
+
+        st.dataframe(
+            autopsy_invoice_history,
+            use_container_width=True,
+            hide_index=True,
+        )
+
+
+# =========================================================
+# RECOVERY LEARNING LOOP
+# =========================================================
+
+st.divider()
+
+st.header("🧠 Recovery Learning Loop")
+
+st.caption(
+    "Uses historical communication outcomes for this customer's "
+    "invoices to identify response patterns and inform the next "
+    "collection approach. This is historical evidence, not a "
+    "validated predictive model."
+)
+
+
+recovery_result = build_recovery_learning_loop(
+    communications=communications,
+    receivables=receivables,
+    customer_name=selected_customer,
+)
+
+
+if recovery_result["actions_analyzed"] == 0:
+
+    st.info(
+        recovery_result.get(
+            "reason",
+            "No historical recovery evidence is available."
+        )
+    )
+
+else:
+
+    recovery_col1, recovery_col2, recovery_col3, recovery_col4 = (
+        st.columns(4)
+    )
+
+    with recovery_col1:
+        st.metric(
+            "Actions Analyzed",
+            recovery_result["actions_analyzed"],
+        )
+
+    with recovery_col2:
+        st.metric(
+            "Response Rate",
+            f"{recovery_result['response_rate']}%",
+        )
+
+    with recovery_col3:
+        st.metric(
+            "No Response",
+            recovery_result["no_response_count"],
+        )
+
+    with recovery_col4:
+        st.metric(
+            "Payment Success Signals",
+            recovery_result["successful_actions"],
+        )
+
+    st.subheader("Historical Recovery Signal")
+
+    st.info(
+        f"Recommended historical channel: "
+        f"**{recovery_result['recommended_action']}**"
+    )
+
+    st.write(
+        "**Why:** "
+        f"{recovery_result['reason']}"
+    )
+
+    action_stats = recovery_result.get(
+        "action_stats",
+        {},
+    )
+
+    if action_stats:
+
+        st.subheader(
+            "Recovery Action Performance"
+        )
+
+        stats_rows = []
+
+        for action, stats in action_stats.items():
+
+            total = stats["total"]
+
+            response_rate = (
+                stats["responses"] / total * 100
+                if total
+                else 0
+            )
+
+            stats_rows.append(
+                {
+                    "Action / Channel": action,
+                    "Total": total,
+                    "Responses": stats["responses"],
+                    "Response Rate": f"{response_rate:.1f}%",
+                    "Payment Success Signals": stats["successful"],
+                    "No Response": stats["no_response"],
+                    "Disputes": stats["disputes"],
+                }
+            )
+
+        st.dataframe(
+            pd.DataFrame(stats_rows),
+            use_container_width=True,
+            hide_index=True,
+        )
+
+    evidence = recovery_result.get(
+        "evidence",
+        [],
+    )
+
+    if evidence:
+
+        st.subheader(
+            "Historical Communication Evidence"
+        )
+
+        evidence_df = pd.DataFrame(
+            evidence
+        )
+
+        display_columns = [
+            column
+            for column in [
+                "invoice_id",
+                "action",
+                "outcome",
+                "notes",
+                "date",
+            ]
+            if column in evidence_df.columns
+        ]
+
+        st.dataframe(
+            evidence_df[display_columns],
+            use_container_width=True,
+            hide_index=True,
+        )
+
+
+# =========================================================
+# RECOMMENDED ACTION
+# =========================================================
+
+st.divider()
+
+st.subheader(
+    "Recommended Collection Action"
+)
+
+if risk_df.empty:
+
+    st.info(
+        "No recommendation available."
+    )
+
+else:
+
+    overdue_days = max_overdue_days
+
+    dispute_values = (
+        customer_invoices[
+            "dispute_status"
+        ]
+        .astype(str)
+        .str.lower()
+    )
+
+    # Only genuine dispute statuses count as an active dispute.
+    # Informational values such as "No Dispute Data" must not
+    # trigger dispute escalation.
+    no_dispute_values = {
+        "",
+        "none",
+        "nan",
+        "no dispute",
+        "no dispute data",
+        "no active dispute",
+        "n/a",
+        "na",
+        "not available",
+        "not_applicable",
+    }
+
+    has_dispute = (
+        ~dispute_values.isin(no_dispute_values)
+    ).any()
+
+    if has_dispute:
+
+        action = (
+            "Resolve dispute before escalation"
+        )
+
+    elif overdue_days <= 7:
+
+        action = (
+            "Friendly payment reminder"
+        )
+
+    elif overdue_days <= 15:
+
+        action = (
+            "Formal payment reminder"
+        )
+
+    elif overdue_days <= 30:
+
+        action = (
+            "Escalation review"
+        )
+
+    else:
+
+        action = (
+            "Management review"
+        )
+
+    st.info(
+        action
+    )
+
+    if has_dispute:
+        st.caption(
+            "Reason: an active dispute is recorded for this customer."
+        )
+    elif overdue_days > 30:
+        st.caption(
+            f"Reason: the oldest outstanding invoice is "
+            f"{overdue_days} days overdue and no active dispute is recorded."
+        )
+    elif overdue_days > 15:
+        st.caption(
+            f"Reason: the outstanding invoice is "
+            f"{overdue_days} days overdue."
+        )
+    elif overdue_days > 7:
+        st.caption(
+            f"Reason: the outstanding invoice is "
+            f"{overdue_days} days overdue."
+        )
+    else:
+        st.caption(
+            f"Reason: the outstanding invoice is "
+            f"{overdue_days} days overdue."
+        )
+
+
+# =========================================================
+# INVOICE HISTORY
+# =========================================================
+
+st.divider()
+
+st.subheader(
+    "Invoice History"
+)
+
+st.dataframe(
+    customer_invoices[
+        [
+            "invoice_id",
+            "invoice_date",
+            "due_date",
+            "invoice_amount",
+            "paid_amount",
+            "outstanding_amount",
+            "payment_status",
+            "overdue_days",
+            "dispute_status",
+        ]
+    ].sort_values(
+        "overdue_days",
+        ascending=False,
+    ),
+    use_container_width=True,
+    hide_index=True,
+)
+
+
+# =========================================================
+# PAYMENT HISTORY
+# =========================================================
+
+st.subheader(
+    "Payment History"
+)
+
+if payments.empty:
+
+    st.info(
+        "No payment data available."
+    )
+
+else:
+
+    customer_payment = payments[
+        payments[
+            "invoice_id"
+        ]
+        .astype(str)
+        .isin(
+            customer_invoices[
+                "invoice_id"
+            ]
+            .astype(str)
+        )
+    ].copy()
+
+    if customer_payment.empty:
+
+        st.info(
+            "No payments found for this customer."
+        )
+
+    else:
+
+        st.dataframe(
+            customer_payment,
+            use_container_width=True,
+            hide_index=True,
+        )
+
+
+# =========================================================
+# COMMUNICATION HISTORY
+# =========================================================
+
+st.subheader(
+    "Communication History"
+)
+
+if communications.empty:
+
+    st.info(
+        "No communication records available."
+    )
+
+else:
+
+    customer_invoice_ids = set(
+        customer_invoices[
+            "invoice_id"
+        ]
+        .astype(str)
+        .str.strip()
+        .str.upper()
+    )
+
+    if "invoice_id" in communications.columns:
+
+        customer_communications = (
+            communications[
+                communications["invoice_id"]
+                .astype(str)
+                .str.strip()
+                .str.upper()
+                .isin(customer_invoice_ids)
+            ].copy()
+        )
+
+    else:
+
+        customer_communications = pd.DataFrame()
+
+    if customer_communications.empty:
+
+        st.info(
+            "No communication history found "
+            "for this customer's invoices."
+        )
+
+    else:
+
+        st.dataframe(
+            customer_communications,
+            use_container_width=True,
+            hide_index=True,
+        )
+
+
+# =========================================================
+# FOOTER
+# =========================================================
+
+st.divider()
+
+st.caption(
+    "Customer 360 combines financial records, payment history, "
+    "risk signals, payment-delay behavior, disputes, recovery "
+    "learning signals, and communication data."
+)
+
+

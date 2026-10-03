@@ -1,0 +1,2 @@
+promise_id,invoice_id,customer_name,promised_amount,promised_date,status,created_at,fulfilled_at,notes
+PTP-20261001123944,INV-1008,Pioneer Distributors,410000.0,2026-10-08,PENDING,2026-10-01T12:39:44,,

@@ -1,0 +1,11 @@
+invoice_id,customer_name,invoice_date,due_date,invoice_amount,paid_amount,outstanding_amount,payment_status,overdue_days,last_payment_date,last_communication_date,communication_status,dispute_status,notes
+INV-1001,ABC Industries Pvt Ltd,2026-07-15,2026-08-14,480000,0,480000,Unpaid,38,,2026-09-05,No Response,None,Three reminders sent
+INV-1002,Shree Retail Network,2026-08-01,2026-08-31,225000,100000,125000,Partially Paid,21,2026-08-28,2026-09-10,Responded,None,Customer promised balance payment
+INV-1003,Nova Components Ltd,2026-08-05,2026-09-04,350000,350000,0,Paid,0,2026-09-02,2026-09-01,Responded,None,Paid before due date
+INV-1004,Kaveri Foods Pvt Ltd,2026-07-20,2026-08-19,725000,225000,500000,Partially Paid,33,2026-08-20,2026-09-08,No Response,PO Mismatch,PO number mismatch under review
+INV-1005,Metro Packaging Solutions,2026-08-20,2026-09-19,180000,0,180000,Unpaid,2,,2026-09-20,No Response,None,First reminder pending
+INV-1006,Sunrise Engineering Works,2026-07-05,2026-08-04,950000,150000,800000,Partially Paid,51,2026-08-10,2026-08-30,No Response,Payment Extension,Requested payment extension
+INV-1007,GreenLeaf Agro Traders,2026-08-10,2026-09-09,275000,0,275000,Unpaid,12,,2026-09-12,Responded,None,Customer acknowledged invoice
+INV-1008,Pioneer Distributors,2026-07-25,2026-08-24,410000,0,410000,Unpaid,28,,2026-09-07,No Response,Invoice Error,Invoice total being reviewed
+INV-1009,Vertex Industrial Supplies,2026-08-15,2026-09-14,620000,300000,320000,Partially Paid,7,2026-09-13,2026-09-17,Responded,None,Balance expected next cycle
+INV-1010,BlueSky Office Systems,2026-07-10,2026-08-09,560000,0,560000,Unpaid,46,,2026-09-01,No Response,None,No response after four reminders

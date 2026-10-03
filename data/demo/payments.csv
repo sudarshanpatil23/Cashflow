@@ -1,0 +1,9 @@
+﻿invoice_id,customer_name,payment_date,payment_amount
+INV001,Sunrise Components,2026-09-10,25000.0
+INV002,NextGen Electronics,2026-09-11,300000.0
+INV003,Prime Packaging,2026-09-12,300000.0
+INV003,Prime Packaging,2026-09-18,200000.0
+INV004,Metro Engineering,2026-09-13,100000.0
+INV004,Metro Engineering,2026-09-13,100000.0
+INV005,Apex Systems,2026-09-14,50000.0
+INV-9999,Unknown Customer,2026-09-15,75000.0

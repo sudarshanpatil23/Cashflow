@@ -1,0 +1,28 @@
+﻿from __future__ import annotations
+
+import streamlit as st
+
+from frontend.ui_helpers import get_audit_events
+
+
+st.title("Audit Log")
+st.caption("System and collection activity")
+
+df = get_audit_events()
+
+if df.empty:
+    st.info(
+        "No audit events available yet."
+    )
+    st.stop()
+
+st.metric(
+    "Audit Events",
+    len(df),
+)
+
+st.dataframe(
+    df,
+    use_container_width=True,
+    hide_index=True,
+)
